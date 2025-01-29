@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club 421</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="fotos/logoclub421.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --accent: #1DC5C9;
+            --gradient: linear-gradient(135deg, #1DC5C9, #1DC5C9);
+            --gradient-blue: linear-gradient(135deg, #1DC5C9, #1DC5C9);
+        }
+
+        body {
+            background-color: #f5f7fa;
+            padding-bottom: 80px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                        url("fotos/logoclub421.png");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease 0.2s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .runners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .runner-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .runner-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .runner-img {
+             width: 100%;
+             height: 300px;
+             object-fit: cover;
+             object-position: top; /* Esto asegurará que se vean las caras */
+        }
+
+        .runner-info {
+             padding: 1.5rem;
+              background: white; /* Asegura que el fondo sea blanco */
+             position: relative; /* Asegura que esté por encima de la imagen */
+        }
+
+        .runner-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .runner-info p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .runner-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 800px;
+            margin: 2rem auto;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            position: relative;
+            height: 300px;
+        }
+
+        .modal-header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            z-index: 1;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-body h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .race-history {
+            margin-top: 2rem;
+        }
+
+        .race-card {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .race-card:hover {
+            background: #f1f3f5;
+        }
+
+        .form-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin: 4rem 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        button {
+            background: var(--gradient);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        .success-message,
+        .error-message {
+            display: none;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        nav.bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+            z-index: 900;
+        }
+
+        nav.bottom-nav ul {
+            display: flex;
+            justify-content: space-around;
+            list-style: none;
+            padding: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav.bottom-nav a {
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        nav.bottom-nav i {
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .stat-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .modal-content {
+                margin: 1rem;
+            }
+        }
+
+        /* Añade estos estilos a tu archivo CSS existente */
+
+.alert-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    max-width: 400px;
+    width: 100%;
+}
+
+.alert {
+    background: white;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: slideIn 0.3s ease forwards;
+    border-left: 4px solid;
+}
+
+.alert-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.alert-success {
+    border-left-color: #1DC5C9;
+}
+
+.alert-success i {
+    color: #1DC5C9;
+}
+
+.alert-error {
+    border-left-color: #dc3545;
+}
+
+.alert-error i {
+    color: #dc3545;
+}
+
+.alert-close {
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    color: #666;
+    width: auto;
+}
+
+.alert-close:hover {
+    color: #333;
+}
+
+.alert-fade-out {
+    animation: slideOut 0.3s ease forwards;
+}
+
+.runner-modal {
+        display: none; /* Inicialmente oculto */
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.8);
+        z-index: 1000;
+        padding: 2rem;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-content {
+        background: white;
+        max-width: 800px;
+        width: 100%;
+        margin: 2rem auto;
+        border-radius: 20px;
+        overflow: hidden;
+        position: relative;
+        animation: modalFadeIn 0.3s ease;
+        max-height: 90vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .modal-header {
+        position: relative;
+        width: 100%;
+        height: auto;
+        max-height: 50vh;
+        background-color: #f5f5f5;
+    }
+
+    .modal-header img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        max-height: 50vh;
+        display: block; /* Asegura que no haya espacio extra debajo de la imagen */
+    }
+
+    .modal-body {
+        padding: 2rem;
+        overflow-y: auto;
+        flex: 1;
+        background: white;
+    }
+
+    .modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 1.5rem;
+        z-index: 1;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div>
+            <h1>Club 421</h1>
+            <p>Friends Running Team</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="stat-grid">
+            <div class="stat-card">
+                <div class="stat-number">6</div>
+                <div>Corredores</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">6</div>
+                <div>Amigos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">3</div>
+                <div>Han recorrido 42km</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">1</div>
+                <div>Reto activo</div>
+            </div>
+        </div>
+
+        <h2>Nuestros Corredores Elite</h2>
+        <div class="runners-grid" id="runnersGrid">
+            <!-- Los corredores se generarán dinámicamente -->
+        </div>
+
+        <div class="form-container">
+            <h2>Proponer un Reto</h2>
+            <form id="runningClubForm" method="POST">
+                <div class="form-group">
+                    <label for="name">Nombre</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+            
+                <div class="form-group">
+                    <label for="lastname">Apellidos</label>
+                    <input type="text" id="lastname" name="lastname" required>
+                </div>
+            
+                <div class="form-group">
+                    <label for="email">Correo Electrónico</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+            
+                <div class="form-group">
+                    <label for="level">Nivel</label>
+                    <select id="level" name="level" required>
+                        <option value="">Selecciona el nivel del reto</option>
+                        <option value="Principiante">Principiante</option>
+                        <option value="Intermedio">Intermedio</option>
+                        <option value="Avanzado">Avanzado</option>
+                        <option value="Elite">Elite</option>
+                    </select>
+                </div>
+            
+                <div class="form-group">
+                    <label for="challenge">Descripción del Reto</label>
+                    <textarea id="challenge" name="challenge" rows="4" required></textarea>
+                </div>
+            
+                <div class="form-group">
+                    <label for="runner">Corredor Asignado</label>
+                    <select id="runner" name="runner" required>
+                        <option value="">Selecciona un corredor</option>
+                        <!-- Las opciones se cargarán dinámicamente con JavaScript -->
+                    </select>
+                </div>
+            
+                <button type="submit">Enviar Reto</button>
+            </form>
+        </div>
+        <script src="Google Sheets Web.js"></script>
+    </div>
+
+    <div id="runnerModal" class="runner-modal">
+        <!-- El contenido del modal se generará dinámicamente -->
+    </div>
+
+    <nav class="bottom-nav">
+        <ul>
+            <li>
+                <a href="https://club421.github.io/inicio.html">
+                    <i class="fas fa-home"></i>
+                    <span>Inicio</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://club421.github.io/retos.html">
+                    <i class="fas fa-trophy"></i>
+                    <span>Retos</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://club421.github.io/nosotros.html">
+                    <i class="fas fa-users"></i>
+                    <span>Nosotros</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://club421.github.io/contacto.html">
+                    <i class="fas fa-envelope"></i>
+                    <span>Contacto</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <script>
+        // Datos de los corredores
+        const runners = [
+            {
+                id: 1,
+                name: "Álvaro Villegas",
+                image: "fotos/Álvaro Villegas.png",
+                races: [
+                    { name: "21km Madrid" },
+                    { name: "10km Aranjuez x2" },
+                    { name: "21km Bilbao" },
+                    { name: "21km Behobia" }
+                ]
+            },
+            {
+                id: 2,
+                name: "Victor Gil",
+                image: "fotos/Victor Gil.jpeg",
+                races: [
+                    { name: "10km Aranjuez"},
+                    { name: "10km Madrid"},
+                    { name: "21km Bilbao"}
+                ]
+            },
+            {
+                id: 3,
+                name: "Nacho Moreno",
+                image: "fotos/Nacho Moreno.jpg",
+                races: [
+                    { name: "42km Valencia"},
+                    { name: "21km Valencia"},
+                    { name: "21km Behobia"},
+                    { name: "21km Sevilla" },
+                    { name: "10km Aranjuez" }
+                ]
+            },
+            {
+                id: 4,
+                name: "Diego Grau",
+                image: "fotos/Diego Grau.png",
+                races: [
+                    { name: "42km Valencia"},
+                    { name: "42km Paris"},
+                    { name: "21km Madrid"},
+                    { name: "21km Bilbao" },
+                    { name: "21km Behobia" },
+                    { name: "10km Aranjuez" }
+                ]
+            },
+            {
+                id: 5,
+                name: "Jorge Toba",
+                image: "fotos/Jorge Toba.png",
+                races: [
+                    { name: "21km Behobia"},
+                    { name: "10km Aranjuez"}
+                ]
+            },
+            {
+                id: 6,
+                name: "Iñigo Ruiz",
+                image: "fotos/Ínigo Ruiz.png",
+                races: [
+                    { name: "42km Valencia"},
+                    { name: "21km Madrid"},
+                    { name: "10km Aranjuez x2"},
+                    { name: "10km Madrid" },
+                    { name: "21km Bilbao" }
+                ]
+            }
+        ];
+
+        // Función para cargar los corredores en la grid
+        function loadRunners() {
+            const runnersGrid = document.getElementById('runnersGrid');
+            const runnerSelect = document.getElementById('runner');
+            
+            runners.forEach(runner => {
+                // Añadir corredor a la grid
+                const runnerCard = document.createElement('div');
+                runnerCard.className = 'runner-card';
+                runnerCard.innerHTML = `
+                    <img src="${runner.image}" alt="${runner.name}" class="runner-img">
+                    <div class="runner-info">
+                        <h3>${runner.name}</h3>
+                    </div>
+                `;
+                
+                runnerCard.addEventListener('click', () => showRunnerModal(runner));
+                runnersGrid.appendChild(runnerCard);
+
+                // Añadir corredor al select del formulario
+                const option = document.createElement('option');
+                option.value = runner.id;
+                option.textContent = `${runner.name}`;
+                runnerSelect.appendChild(option);
+            });
+        }
+
+        // Función para mostrar el modal del corredor
+        function showRunnerModal(runner) {
+        const modal = document.getElementById('runnerModal');
+        modal.innerHTML = `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <img src="${runner.image}" alt="${runner.name}">
+                    <div class="modal-close" onclick="closeRunnerModal()">
+                        <i class="fas fa-times"></i>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <h2>${runner.name}</h2>
+                    <div class="race-history">
+                        <h3>Historial de Carreras</h3>
+                        ${runner.races.map(race => `
+                            <div class="race-card">
+                                <div>
+                                    <strong>${race.name}</strong>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </div>
+        `;
+        modal.style.display = 'flex'; // Cambiado a flex
+        document.body.style.overflow = 'hidden';
+    }
+
+        // Función para cerrar el modal
+        function closeRunnerModal() {
+            const modal = document.getElementById('runnerModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Cerrar modal al hacer clic fuera
+        window.onclick = function(event) {
+            const modal = document.getElementById('runnerModal');
+            if (event.target == modal) {
+                closeRunnerModal();
+            }
+        }
+
+        // Cargar los corredores al iniciar la página
+        document.addEventListener('DOMContentLoaded', loadRunners);
+
+        // Asegurarse de que el modal esté oculto al cargar la página
+    document.addEventListener('DOMContentLoaded', () => {
+        const modal = document.getElementById('runnerModal');
+        modal.style.display = 'none';
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retos - Club 421</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="fotos/logoclub421.png">
+    <style>
+        /* Estilos base heredados */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --accent: #1DC5C9;
+            --gradient: linear-gradient(135deg, #1DC5C9, #1DC5C9);
+        }
+
+        body {
+            background-color: #f5f7fa;
+            padding-bottom: 80px;
+        }
+
+        .container {
+            max-width: 800px;  /* Reducido para mejor presentación vertical */
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Estilos específicos para la página de retos */
+        .challenges-header {
+            text-align: center;
+            margin: 2rem 0;
+            color: var(--primary);
+        }
+
+        .challenges-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .challenges-header p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .challenges-section {
+            margin: 4rem 0;
+        }
+
+        .challenges-section h2 {
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .challenge-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .challenge-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .challenge-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .challenge-status {
+            padding: 0.5rem 1rem;
+            color: white;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .status-active {
+            background: var(--accent);
+        }
+
+        .status-completed {
+            background: #28a745;
+        }
+
+        .challenge-content {
+            padding: 1.5rem;
+        }
+
+        .challenge-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .challenge-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        .challenge-details {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .challenge-runner {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .runner-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* Navegación inferior heredada */
+        nav.bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+            z-index: 900;
+        }
+
+        nav.bottom-nav ul {
+            display: flex;
+            justify-content: space-around;
+            list-style: none;
+            padding: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav.bottom-nav a {
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        nav.bottom-nav i {
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .challenges-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="challenges-header">
+            <h1>Retos Club 421</h1>
+            <p>Descubre nuestros retos activos y completados</p>
+        </header>
+
+        <section class="challenges-section">
+            <h2><i class="fas fa-running"></i> Retos Activos</h2>
+            <div class="challenge-grid">
+                <div class="challenge-card">
+                    <div class="challenge-status status-active">En Progreso</div>
+                    <div class="challenge-content">
+                        <h3>Correr 2025 kilómetros en 2025</h3>
+                        <div class="challenge-info">
+                            <span><i class="fas fa-calendar"></i> 1 Enero - 1 Diciembre</span>
+                            <span><i class="fas fa-flag-checkered"></i> 2025km</span>
+                        </div>
+                        <div class="challenge-details">
+                            <p>Objetivo: Correr 2025 kilómetros en 2025</p>
+                            <div class="challenge-runner">
+                                <img src="fotos/Victor Gil.jpeg" alt="Victor Gil" class="runner-avatar">
+                                <span>Victor Gil</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="challenges-section">
+            <h2><i class="fas fa-trophy"></i> Retos Completados</h2>
+            <div class="challenge-grid">
+                <div class="challenge-card">
+                    <div class="challenge-status status-completed">Completado</div>
+                    <div class="challenge-content">
+                        <h3>Maratón de París 2024</h3>
+                        <div class="challenge-info">
+                            <span><i class="fas fa-calendar"></i> Abr 2024</span>
+                            <span><i class="fas fa-flag-checkered"></i> 42km</span>
+                        </div>
+                        <div class="challenge-details">
+                            <p>Objetivo cumplido: Terminarla por debajo de 4h 30min</p>
+                            <div class="challenge-runner">
+                                <img src="fotos/Diego Grau.png" alt="Diego Grau" class="runner-avatar">
+                                <span>Diego Grau</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="challenge-card">
+                    <div class="challenge-status status-completed">Completado</div>
+                    <div class="challenge-content">
+                        <h3>Maratón de Valencia 2024</h3>
+                        <div class="challenge-info">
+                            <span><i class="fas fa-calendar"></i> Dic 2024</span>
+                            <span><i class="fas fa-flag-checkered"></i> 42km</span>
+                        </div>
+                        <div class="challenge-details">
+                            <p>Objetivo cumplido: Acabar la Maratón</p>
+                            <div class="challenge-runner">
+                                <img src="fotos/Ínigo Ruiz.png" alt="Iñigo Ruiz" class="runner-avatar">
+                                <span>Iñigo Ruiz</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="challenge-card">
+                    <div class="challenge-status status-completed">Completado</div>
+                    <div class="challenge-content">
+                        <h3>10km Aranjuez</h3>
+                        <div class="challenge-info">
+                            <span><i class="fas fa-calendar"></i> Dic 2024</span>
+                            <span><i class="fas fa-flag-checkered"></i> 10km</span>
+                        </div>
+                        <div class="challenge-details">
+                            <p>Objetivo cumplido: Correr 10km en menos de 40 min</p>
+                            <div class="challenge-runner">
+                                <img src="fotos/Álvaro Villegas.png" alt="Álvaro Villegas" class="runner-avatar">
+                                <span>Álvaro Villegas</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="challenge-card">
+                    <div class="challenge-status status-completed">Completado</div>
+                    <div class="challenge-content">
+                        <h3>10km Aranjuez</h3>
+                        <div class="challenge-info">
+                            <span><i class="fas fa-calendar"></i> Dic 2024</span>
+                            <span><i class="fas fa-flag-checkered"></i> 10km</span>
+                        </div>
+                        <div class="challenge-details">
+                            <p>Objetivo cumplido: Terminarla después de una operación de LCA</p>
+                            <div class="challenge-runner">
+                                <img src="fotos/Jorge Toba.png" alt="Jorge Toba" class="runner-avatar">
+                                <span>Jorge Toba</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="challenge-card">
+                    <div class="challenge-status status-completed">Completado</div>
+                    <div class="challenge-content">
+                        <h3>Maratón de Valencia 2024</h3>
+                        <div class="challenge-info">
+                            <span><i class="fas fa-calendar"></i> Dic 2024</span>
+                            <span><i class="fas fa-flag-checkered"></i> 42km</span>
+                        </div>
+                        <div class="challenge-details">
+                            <p>Objetivo cumplido: Acabar la Maratón</p>
+                            <div class="challenge-runner">
+                                <img src="fotos/Nacho Moreno.jpg" alt="Nacho Moreno" class="runner-avatar">
+                                <span>Nacho Moreno</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <nav class="bottom-nav">
+        <ul>
+            <li>
+                <a href="https://club421.github.io/inicio.html">
+                    <i class="fas fa-home"></i>
+                    <span>Inicio</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://club421.github.io/retos.html">
+                    <i class="fas fa-trophy"></i>
+                    <span>Retos</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://club421.github.io/nosotros.html">
+                    <i class="fas fa-users"></i>
+                    <span>Nosotros</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://club421.github.io/contacto.html">
+                    <i class="fas fa-envelope"></i>
+                    <span>Contacto</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</body>
+</html>
