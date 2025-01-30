@@ -33,36 +33,38 @@
         }
 
         .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-                        url("fotos/logoclub421.png");
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            position: relative;
-        }
+    height: 100vh;
+    background: #1DC5C9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    position: relative;
+}
 
-        .hero h1 {
-            font-size: 4.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            animation: fadeInUp 1s ease;
-        }
+.hero h1 {
+    font-size: 4.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: fadeInUp 1s ease;
+}
 
-        .hero p {
-            font-size: 1.5rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-            animation: fadeInUp 1s ease 0.2s;
-        }
+.hero p {
+    font-size: 1.5rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+    animation: fadeInUp 1s ease 0.2s;
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 3rem;
+    }
+}
 
         @keyframes fadeInUp {
             from {
@@ -540,7 +542,7 @@
             </div>
         </div>
 
-        <h2>Nuestros Corredores Elite</h2>
+        <h2>Nuestros Corredores</h2>
         <div class="runners-grid" id="runnersGrid">
             <!-- Los corredores se generarán dinámicamente -->
         </div>
